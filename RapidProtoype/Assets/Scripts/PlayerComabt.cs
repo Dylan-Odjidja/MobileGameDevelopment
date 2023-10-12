@@ -19,16 +19,13 @@ public class PlayerComabt : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
+            Touch touch = Input.GetTouch(1);
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
 
             if (Time.time >= nextAttackTime)
             {
-                if (touchPosition.x >= 0.0f)
-                {
-                    Attack();
-                    nextAttackTime = Time.time + 1f / attackRate;
-                }
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
             }
         }
     }
