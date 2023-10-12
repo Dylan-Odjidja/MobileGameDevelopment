@@ -14,7 +14,6 @@ public class PlyaerMovement : MonoBehaviour
     public float runSpeed = 40f;
     float horizontalMove = 0f;
     bool jump = false;
-    bool shield = false;
 
     void Update()
     {
@@ -40,18 +39,6 @@ public class PlyaerMovement : MonoBehaviour
             jump = true;
             animator.SetBool("IsJumping?", true);
         }
-
-        if (verticalMove <= -.5f)
-        {
-            shield = true;
-            horizontalMove = 0f;
-            animator.SetBool("IsBlocking?", true);
-        }
-        else
-        {
-            shield = false;
-            animator.SetBool("IsBlocking?", false);
-        }
     }
 
     public void OnLanding()
@@ -61,8 +48,7 @@ public class PlyaerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, shield, jump);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
         jump = false;
-        shield = false;
     }
 }
