@@ -28,7 +28,8 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         animator.SetBool("IsDead?", true);
-        GetComponent<Collider2D>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = true;
         this.enabled = false;
     }
 }

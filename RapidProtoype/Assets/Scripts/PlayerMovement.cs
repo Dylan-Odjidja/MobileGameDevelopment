@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
-using UnityEditor.Callbacks;
 using UnityEngine;
 
-public class PlyaerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public CharacterController2D controller;
     public Animator animator;
@@ -31,14 +30,12 @@ public class PlyaerMovement : MonoBehaviour
         {
             horizontalMove = 0f;
         }
+    }
 
-        float verticalMove = joystick.Vertical;
-
-        if (verticalMove >= .5f)
-        {
-            jump = true;
-            animator.SetBool("IsJumping?", true);
-        }
+    public void Jump()
+    {
+        jump = true;
+        animator.SetBool("IsJumping?", true);
     }
 
     public void OnLanding()

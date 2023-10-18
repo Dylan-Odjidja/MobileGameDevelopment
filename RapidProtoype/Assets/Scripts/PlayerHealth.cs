@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-
     public int maxHealth = 100;
     public int currentHealth;
-
+    public Animator animator;
     public HealthBar healthBar;
+    public GameObject menu;
 
     void Start()
     {
@@ -26,8 +26,29 @@ public class PlayerHealth : MonoBehaviour
 
     void TakeDamage(int damage)
     {
+        animator.SetTrigger("Hurt");
+
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        animator.SetBool("IsAlive?", false);
+        this.enabled = false;
+        StartCoroutine(YouDied());
+    }
+
+    public IEnumerator YouDied()
+    {
+        yield return new WaitForSeconds(2);
+        menu.SetActive(true);
+        Time.timeScale = 0;
     }
 }

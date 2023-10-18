@@ -17,28 +17,23 @@ public class PlayerComabt : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(1);
-            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
 
-            if (Time.time >= nextAttackTime)
-            {
-                Attack();
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
-        }
     }
 
-    void Attack()
+    public void Attack()
     {
-        animator.SetTrigger("Attack");
-
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        foreach (Collider2D enemy in hitEnemies)
+        if (Time.time >= nextAttackTime)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            animator.SetTrigger("Attack");
+
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            }
+
+            nextAttackTime = Time.time + 1f / attackRate;
         }
     }
 
