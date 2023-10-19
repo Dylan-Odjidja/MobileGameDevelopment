@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject menu;
+    public GameObject pauseMenu;
+    public GameObject settingsMenu;
 
     public void Resume()
     {
-        menu.SetActive(false);
+        pauseMenu.SetActive(false);
         Time.timeScale = 1;
     }
 
     public void Settings()
     {
+        pauseMenu.SetActive(false);
+        settingsMenu.SetActive(true);
+    }
 
+    public void Back()
+    {
+        pauseMenu.SetActive(true);
+        settingsMenu.SetActive(false);
     }
 
     public void Quit()

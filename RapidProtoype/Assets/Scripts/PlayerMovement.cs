@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public void Jump()
     {
         jump = true;
-        SoundManager.PlaySound("PlayerJump");
+
         animator.SetBool("IsJumping?", true);
     }
 

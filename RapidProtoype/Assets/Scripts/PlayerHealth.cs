@@ -40,8 +40,8 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
+        MusicPlayer.audioSource.Stop();
         animator.SetBool("IsAlive?", false);
-        SoundManager.PlaySound("PlayerDeath");
         this.enabled = false;
         StartCoroutine(YouDied());
     }
