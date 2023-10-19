@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         animator.SetBool("IsAlive?", false);
+        SoundManager.PlaySound("PlayerDeath");
         this.enabled = false;
         StartCoroutine(YouDied());
     }

@@ -25,6 +25,7 @@ public class PlayerComabt : MonoBehaviour
         if (Time.time >= nextAttackTime)
         {
             animator.SetTrigger("Attack");
+            SoundManager.PlaySound("PlayerSwing");
 
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
