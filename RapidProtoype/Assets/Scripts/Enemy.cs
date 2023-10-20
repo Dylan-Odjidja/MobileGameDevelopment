@@ -2,37 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class Enemy : MonoBehaviour
 {
+    // Animator
     private Animator animator;
+    // Set max health
     public int maxHealth = 100;
+    // Current health variable
     int currentHealth;
-    [SerializeField] private float speed;
-    private bool isFacingLeft;
-    private bool isRunning;
+    // Reference to waypoints
+    public List<Transform> points;
+    // Integer value for next point index
+    public int nextID = 0;
+    // Value that applies to ID for changing
+    private int idChangeValue = 1;
+    // Speed of movemnt
+    public float speed = 3;
+
+    private void Reset()
+    {
+        Init();
+    }
 
     void Start()
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
-        StartCoroutine(FlipRight());
     }
 
-    void Update()
+    private void Update()
     {
-        if (isRunning)
-        {
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
-        }
-
-        if (isFacingLeft)
-        {
-            transform.eulerAngles = Vector3.zero;
-        }
-        else
-        {
-            transform.eulerAngles = new Vector3(0, 180, 0);
-        }
+        MoveToNextPoint();
     }
 
     public void TakeDamage(int damage)
@@ -49,35 +50,83 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        isRunning = false;
         animator.SetBool("IsRunning?", false);
         animator.SetBool("IsDead?", true);
-        GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<CapsuleCollider2D>().enabled = true;
+        // GetComponent<BoxCollider2D>().enabled = false;
         this.enabled = false;
     }
 
-    public IEnumerator FlipRight()
+    void Init()
     {
-        isRunning = true;
-        animator.SetBool("IsRunning?", true);
-        yield return new WaitForSeconds(5);
-        isRunning = false;
-        animator.SetBool("IsRunning?", false);
-        yield return new WaitForSeconds(2);
-        isFacingLeft = false;
-        StartCoroutine(FlipLeft());
+        // Make box collider trigger
+        GetComponent<BoxCollider2D>().isTrigger = true;
+
+        // Create Root object
+        GameObject root = new GameObject(name + "_Root");
+
+        // Reset position of Root to enemy object
+        root.transform.position = transform.position;
+
+        // Set enemy object as child of root
+        transform.SetParent(root.transform);
+
+        // Create waypoints object
+        GameObject waypoints = new GameObject("Waypoints");
+
+        // Reset waypoints position to root
+        // Make waypoints object child of root
+        waypoints.transform.SetParent(root.transform);
+        waypoints.transform.position = root.transform.position;
+
+        // Create two points and reset thier position to waypoints object
+        // Make points children of waypoint object
+        GameObject p1 = new GameObject("Point1");
+        p1.transform.SetParent(waypoints.transform);
+        p1.transform.position = root.transform.position;
+        GameObject p2 = new GameObject("Point2");
+        p2.transform.SetParent(waypoints.transform);
+        p2.transform.position = root.transform.position;
+
+        // Initiate points list then add the points to it
+        points = new List<Transform>
+        {
+            p1.transform,
+            p2.transform
+        };
     }
 
-    public IEnumerator FlipLeft()
+    void MoveToNextPoint()
     {
-        isRunning = true;
         animator.SetBool("IsRunning?", true);
-        yield return new WaitForSeconds(5);
-        isRunning = false;
-        animator.SetBool("IsRunning?", false);
-        yield return new WaitForSeconds(2);
-        isFacingLeft = true;
-        StartCoroutine(FlipRight());
+        // Get next point transform
+        Transform goalPoint = points[nextID];
+        // Flip enemy transform
+        if (goalPoint.transform.position.x > transform.position.x)
+        {
+            transform.localScale = new Vector3(-2, 2, 2);
+        }
+        else
+        {
+            transform.localScale = new Vector3(2, 2, 2);
+        }
+        // Move the enemy
+
+        transform.position = Vector3.MoveTowards(transform.position, goalPoint.position, speed * Time.deltaTime);
+        // Check distance between enemy and point
+        if (Vector2.Distance(transform.position, goalPoint.position) < 1f)
+        {
+            // Check if enemy is at the end of the line
+            if (nextID == points.Count - 1)
+            {
+                idChangeValue = -1;
+            }
+            // Check if enemy is at the start of the line
+            if (nextID == 0)
+            {
+                idChangeValue = 1;
+            }
+            // Apply the change on the nextID
+            nextID += idChangeValue;
+        }
     }
 }
