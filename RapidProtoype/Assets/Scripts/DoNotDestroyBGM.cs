@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoNotDestroy : MonoBehaviour
+public class DoNotDestroyBGM : MonoBehaviour
 {
     private void Awake()
     {

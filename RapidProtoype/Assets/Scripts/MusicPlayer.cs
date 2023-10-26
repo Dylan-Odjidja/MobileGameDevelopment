@@ -7,7 +7,7 @@ public class MusicPlayer : MonoBehaviour
 {
     public static AudioSource audioSource;
     private float musicVolume = 1f;
-    public Slider volumeSlider;
+    public Slider musicSlider;
     public GameObject musicObject;
 
     void Start()
@@ -21,7 +21,7 @@ public class MusicPlayer : MonoBehaviour
         // Set the volume of the audio source to the retrieved or default musicVolume.
         audioSource.volume = musicVolume;
         // Set the value of the volumeSlider UI control to match the current musicVolume.
-        volumeSlider.value = musicVolume;
+        musicSlider.value = musicVolume;
     }
 
     void Update()

@@ -24,6 +24,14 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(20);
         }
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Die();
+        }
     }
 
     void TakeDamage(int damage)
@@ -35,20 +43,14 @@ public class PlayerHealth : MonoBehaviour
         // Update the health bar UI to reflect the new health value.
         healthBar.SetHealth(currentHealth);
         // Check if the character's health has dropped to or below zero.
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
     }
 
     void Die()
     {
-        // Stop the background music
-        MusicPlayer.audioSource.Stop();
         // Set the "IsAlive?" boolean parameter in the Animator to false.
         animator.SetBool("IsAlive?", false);
-        // Disable this script to prevent further interactions.
-        this.enabled = false;
+        // Stop the background music
+        MusicPlayer.audioSource.Stop();
         // Start a coroutine to handle the "You Died" process, such as displaying a menu and pausing the game.
         StartCoroutine(YouDied());
     }

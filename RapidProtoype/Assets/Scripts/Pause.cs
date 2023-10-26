@@ -2,30 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseMenu : MonoBehaviour
+public class Pause : MonoBehaviour
 {
     public GameObject pauseMenu;
     public GameObject settingsMenu;
 
-    public void Resume()
+    public void ResumeGame()
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
     }
 
-    public void Settings()
+    public void PauseGame()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void OpenSettings()
     {
         pauseMenu.SetActive(false);
         settingsMenu.SetActive(true);
     }
 
-    public void Back()
+    public void GoBack()
     {
         pauseMenu.SetActive(true);
         settingsMenu.SetActive(false);
     }
 
-    public void Quit()
+    public void QuitGame()
     {
         Application.Quit();
     }
