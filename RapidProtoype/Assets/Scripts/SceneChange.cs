@@ -5,16 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour
 {
-    public GameObject menu;
 
     public void MoveToScene(int sceneId)
     {
+        // Load the scene specified by the sceneId
         SceneManager.LoadScene(sceneId);
     }
 
-    public void OpenSettings()
-    {
-        menu.SetActive(true);
-        Time.timeScale = 0;
-    }
 }

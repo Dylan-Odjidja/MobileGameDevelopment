@@ -7,19 +7,12 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class Enemy : MonoBehaviour
 {
-    // Animator
     private Animator animator;
-    // Set max health
     public int maxHealth = 100;
-    // Current health variable
     int currentHealth;
-    // Reference to waypoints
     public List<Transform> points;
-    // Integer value for next point index
     public int nextID = 0;
-    // Value that applies to ID for changing
     private int idChangeValue = 1;
-    // Speed of movemnt
     public float speed = 3;
     BoxCollider2D boxCollider;
     Rigidbody2D rigidBody;
