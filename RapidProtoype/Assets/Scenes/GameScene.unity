@@ -1216,11 +1216,7 @@ CanvasRenderer:
   m_GameObject: {fileID: 296133254}
   m_CullTransparentMesh: 1
 <<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!1 &343840564
-=======
---- !u!1 &359215878
->>>>>>> parent of fbd0fbe (Commenting)
 =======
 --- !u!1 &359215878
 >>>>>>> parent of fbd0fbe (Commenting)
@@ -1231,7 +1227,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< HEAD
 <<<<<<< HEAD
   - component: {fileID: 343840565}
   - component: {fileID: 343840569}
@@ -1245,24 +1240,14 @@ GameObject:
   m_Layer: 0
   m_Name: Waypoints
 >>>>>>> parent of fbd0fbe (Commenting)
-=======
-  - component: {fileID: 359215879}
-  m_Layer: 0
-  m_Name: Waypoints
->>>>>>> parent of fbd0fbe (Commenting)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
 <<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!224 &343840565
 RectTransform:
-=======
---- !u!4 &359215879
-Transform:
->>>>>>> parent of fbd0fbe (Commenting)
 =======
 --- !u!4 &359215879
 Transform:
@@ -1271,7 +1256,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
 <<<<<<< HEAD
   m_GameObject: {fileID: 343840564}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
@@ -1396,8 +1380,6 @@ CanvasRenderer:
   m_GameObject: {fileID: 343840564}
   m_CullTransparentMesh: 1
 =======
-=======
->>>>>>> parent of fbd0fbe (Commenting)
   m_GameObject: {fileID: 359215878}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -5841,11 +5823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!1 &2013726984
-=======
---- !u!1 &2045210392
->>>>>>> parent of fbd0fbe (Commenting)
 =======
 --- !u!1 &2045210392
 >>>>>>> parent of fbd0fbe (Commenting)
@@ -5857,13 +5835,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
 <<<<<<< HEAD
-<<<<<<< HEAD
   - component: {fileID: 2013726985}
   m_Layer: 0
   m_Name: Point1
 =======
-=======
->>>>>>> parent of fbd0fbe (Commenting)
   - component: {fileID: 2045210393}
   - component: {fileID: 2045210397}
   - component: {fileID: 2045210396}
@@ -5871,9 +5846,6 @@ GameObject:
   - component: {fileID: 2045210394}
   m_Layer: 5
   m_Name: Back
-<<<<<<< HEAD
->>>>>>> parent of fbd0fbe (Commenting)
-=======
 >>>>>>> parent of fbd0fbe (Commenting)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5881,13 +5853,8 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 <<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!4 &2013726985
 Transform:
-=======
---- !u!224 &2045210393
-RectTransform:
->>>>>>> parent of fbd0fbe (Commenting)
 =======
 --- !u!224 &2045210393
 RectTransform:
@@ -5896,7 +5863,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
 <<<<<<< HEAD
   m_GameObject: {fileID: 2013726984}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -5908,8 +5874,6 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 =======
-=======
->>>>>>> parent of fbd0fbe (Commenting)
   m_GameObject: {fileID: 2045210392}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -6032,9 +5996,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045210392}
   m_CullTransparentMesh: 1
-<<<<<<< HEAD
->>>>>>> parent of fbd0fbe (Commenting)
-=======
 >>>>>>> parent of fbd0fbe (Commenting)
 --- !u!1 &2091188392
 GameObject:
