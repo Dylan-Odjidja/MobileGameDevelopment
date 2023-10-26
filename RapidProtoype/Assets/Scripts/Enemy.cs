@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
     // Animator
@@ -19,6 +20,10 @@ public class Enemy : MonoBehaviour
     private int idChangeValue = 1;
     // Speed of movemnt
     public float speed = 3;
+    // Box collider variable
+    BoxCollider2D boxCollider;
+    // Rigigbody variable
+    Rigidbody2D rigidBody;
 
     private void Reset()
     {
@@ -53,13 +58,18 @@ public class Enemy : MonoBehaviour
         animator.SetBool("IsRunning?", false);
         animator.SetBool("IsDead?", true);
         // GetComponent<BoxCollider2D>().enabled = false;
+        Score.ScoreValue += 10;
         this.enabled = false;
     }
 
     void Init()
     {
-        // Make box collider trigger
-        GetComponent<BoxCollider2D>().isTrigger = true;
+        // Change the size of the box collide
+        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider.size = new Vector2(1.071695f, 1.408641f);
+        // Set the gravity of the rigid body
+        rigidBody = GetComponent<Rigidbody2D>();
+        rigidBody.gravityScale = 3;
 
         // Create Root object
         GameObject root = new GameObject(name + "_Root");
@@ -82,10 +92,10 @@ public class Enemy : MonoBehaviour
         // Make points children of waypoint object
         GameObject p1 = new GameObject("Point1");
         p1.transform.SetParent(waypoints.transform);
-        p1.transform.position = root.transform.position;
+        p1.transform.position = new Vector3(transform.position.x - 5f, transform.position.y, transform.position.z);
         GameObject p2 = new GameObject("Point2");
         p2.transform.SetParent(waypoints.transform);
-        p2.transform.position = root.transform.position;
+        p2.transform.position = new Vector3(transform.position.x + 5f, transform.position.y, transform.position.z);
 
         // Initiate points list then add the points to it
         points = new List<Transform>
