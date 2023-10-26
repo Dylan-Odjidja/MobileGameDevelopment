@@ -43,8 +43,11 @@ public class PlayerMovement : MonoBehaviour
     public void OnLanding()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         Debug.Log("Landed");
         // Set the "IsJumping?" boolean parameter in the Animator to false.
+=======
+>>>>>>> parent of fbd0fbe (Commenting)
 =======
 >>>>>>> parent of fbd0fbe (Commenting)
         animator.SetBool("IsJumping?", false);
