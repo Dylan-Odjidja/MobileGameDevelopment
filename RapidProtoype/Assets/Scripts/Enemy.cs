@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(CapsuleCollider2D))]
 public class Enemy : MonoBehaviour
 {
     private Animator animator;
@@ -14,10 +12,6 @@ public class Enemy : MonoBehaviour
     public int nextID = 0;
     private int idChangeValue = 1;
     public float speed = 3;
-    BoxCollider2D boxCollider;
-    Rigidbody2D rigidBody;
-    CapsuleCollider2D capsuleCollider;
-
 
     private void Reset()
     {
@@ -51,26 +45,14 @@ public class Enemy : MonoBehaviour
     {
         animator.SetBool("IsRunning?", false);
         animator.SetBool("IsDead?", true);
-        // boxCollider.enabled = false;
-        // capsuleCollider.enabled = true;
+        // GetComponent<BoxCollider2D>().enabled = false;
         this.enabled = false;
-        Score.ScoreValue += 10;
     }
 
     void Init()
     {
-        // Change the size of the box collider
-        boxCollider = GetComponent<BoxCollider2D>();
-        boxCollider.size = new Vector2(1.071695f, 1.408641f);
-        // Set the gravity of the rigid body
-        rigidBody = GetComponent<Rigidbody2D>();
-        rigidBody.gravityScale = 3;
-        // Change the size of the capsule collider
-        capsuleCollider = GetComponent<CapsuleCollider2D>();
-        capsuleCollider.size = new Vector2(1.4756f, 0.2662713f);
-        capsuleCollider.offset = new Vector2(2.256041e-08f, 0.1892504f);
-        capsuleCollider.direction = CapsuleDirection2D.Horizontal;
-        capsuleCollider.enabled = false;
+        // Make box collider trigger
+        GetComponent<BoxCollider2D>().isTrigger = true;
 
         // Create Root object
         GameObject root = new GameObject(name + "_Root");
@@ -93,10 +75,10 @@ public class Enemy : MonoBehaviour
         // Make points children of waypoint object
         GameObject p1 = new GameObject("Point1");
         p1.transform.SetParent(waypoints.transform);
-        p1.transform.position = new Vector3(transform.position.x - 5f, transform.position.y, transform.position.z);
+        p1.transform.position = root.transform.position;
         GameObject p2 = new GameObject("Point2");
         p2.transform.SetParent(waypoints.transform);
-        p2.transform.position = new Vector3(transform.position.x + 5f, transform.position.y, transform.position.z);
+        p2.transform.position = root.transform.position;
 
         // Initiate points list then add the points to it
         points = new List<Transform>

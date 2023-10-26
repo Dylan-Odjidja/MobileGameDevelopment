@@ -34,8 +34,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Jump()
-    {;
-        Debug.Log("Jumped");
+    {
         jump = true;
         // Set the "IsJumping?" boolean parameter in the Animator to true.
         animator.SetBool("IsJumping?", true);
@@ -43,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnLanding()
     {
-        Debug.Log("Landed");
         // Set the "IsJumping?" boolean parameter in the Animator to false.
         animator.SetBool("IsJumping?", false);
     }
