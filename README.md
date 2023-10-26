@@ -1,4 +1,4 @@
-Knight Run<br>
+![Game Title](Title-1.png)<br>
 Dylan Odjidja S21119698<br>
 
 Documentation:<br>
