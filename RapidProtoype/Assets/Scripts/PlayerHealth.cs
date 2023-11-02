@@ -26,11 +26,11 @@ public class PlayerHealth : MonoBehaviour
         }
         if (currentHealth <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Die();
+            StartCoroutine(Die());
         }
     }
 
@@ -45,20 +45,16 @@ public class PlayerHealth : MonoBehaviour
         // Check if the character's health has dropped to or below zero.
     }
 
-    void Die()
+    public IEnumerator Die()
     {
         // Set the "IsAlive?" boolean parameter in the Animator to false.
         animator.SetBool("IsAlive?", false);
-        // Stop the background music
-        MusicPlayer.audioSource.Stop();
-        // Start a coroutine to handle the "You Died" process, such as displaying a menu and pausing the game.
-        StartCoroutine(YouDied());
-    }
-
-    public IEnumerator YouDied()
-    {
         // Wait for 2 seconds before executing the following code
         yield return new WaitForSeconds(2);
+        // Stop the background music
+        MusicPlayer.audioSource.Stop();
+        // Play death sound
+        SFX.PlaySound("PlayerDeath");
         // Activate the menu GameObject
         menu.SetActive(true);
         // Set the game's time scale to zero, effectively pausing the game.

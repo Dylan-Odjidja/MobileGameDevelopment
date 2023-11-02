@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -7,12 +8,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private Animator animator;
-    public int maxHealth = 100;
+    public int maxHealth = 20;
     int currentHealth;
     public List<Transform> points;
     public int nextID = 0;
     private int idChangeValue = 1;
     public float speed = 3;
+    public GameObject player;
+    private float distance;
+    public float distanceBetween;
     BoxCollider2D boxCollider;
     Rigidbody2D rigidBody;
 
@@ -25,19 +29,54 @@ public class Enemy : MonoBehaviour
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
+        distanceBetween = 6;
     }
 
     private void Update()
     {
-        MoveToNextPoint();
+        // Find and store a reference to the player game object using the "Player" tag.
+        player = GameObject.FindGameObjectWithTag("Player");
+        // Calculate the distance between the enemy and the player's position.
+        distance = Vector2.Distance(transform.position, player.transform.position);
+        // Calculate the direction from the enemy to the player.
+        Vector2 direction = player.transform.position - transform.position;
+        // Normalize the direction to get a unit vector.
+        direction.Normalize();
+        // Calculate the angle in degrees from the normalized direction vector.
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Flip the enemy's sprite based on the relative positions of the enemy and the player.
+        if (player.transform.position.x > transform.position.x)
+        {
+            transform.localScale = new Vector3(-2, 2, 2);
+        }
+        else
+        {
+            transform.localScale = new Vector3(2, 2, 2);
+        }
+
+        // Check if the distance between the enemy and the player is less than a specified threshold.
+        if (distance < distanceBetween)
+        {
+            // Set a boolean parameter in the Animator to indicate that the enemy is running.
+            animator.SetBool("IsRunning?", true);
+            // Move the enemy towards the player's position at a certain speed.
+            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+        }
+        else
+        {
+            // If the player isn't near by run the "MoveToNextPoint()" function
+            MoveToNextPoint();
+        }
     }
 
     public void TakeDamage(int damage)
     {
+        // Deal damage to the enemy
         currentHealth -= damage;
-
+        // Set a boolean parameter in the Animator to indicate that the enemy is hurt.
         animator.SetTrigger("Hurt");
-
+        // If the enemy's health reaches zero, run the "Die()" function
         if (currentHealth <= 0)
         {
             Die();
@@ -46,10 +85,13 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        // Set a boolean parameter in the Animator to indicate that the enemy is running.
         animator.SetBool("IsRunning?", false);
+        // Set a boolean parameter in the Animator to indicate that the enemy is dead.
         animator.SetBool("IsDead?", true);
         // GetComponent<BoxCollider2D>().enabled = false;
         Score.ScoreValue += 10;
+        // Disable the script
         this.enabled = false;
     }
 
@@ -101,7 +143,8 @@ public class Enemy : MonoBehaviour
         animator.SetBool("IsRunning?", true);
         // Get next point transform
         Transform goalPoint = points[nextID];
-        // Flip enemy transform
+
+        // Flip the enemy's sprite based on the relative positions of the enemy and the player.
         if (goalPoint.transform.position.x > transform.position.x)
         {
             transform.localScale = new Vector3(-2, 2, 2);
@@ -110,8 +153,8 @@ public class Enemy : MonoBehaviour
         {
             transform.localScale = new Vector3(2, 2, 2);
         }
-        // Move the enemy
 
+        // Move the enemy
         transform.position = Vector3.MoveTowards(transform.position, goalPoint.position, speed * Time.deltaTime);
         // Check distance between enemy and point
         if (Vector2.Distance(transform.position, goalPoint.position) < 1f)
