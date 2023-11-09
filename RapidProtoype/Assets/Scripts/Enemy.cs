@@ -8,12 +8,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private Animator animator;
-    public int maxHealth = 20;
-    int currentHealth;
+    [Header("Health")]
+    public int maxHealth = 100;
+    public int currentHealth;
+    [Header("Movement")]
     public List<Transform> points;
     public int nextID = 0;
     private int idChangeValue = 1;
     public float speed = 3;
+    [Header("Targeting")]
     public GameObject player;
     private float distance;
     public float distanceBetween;
@@ -56,17 +59,25 @@ public class Enemy : MonoBehaviour
         }
 
         // Check if the distance between the enemy and the player is less than a specified threshold.
-        if (distance < distanceBetween)
+        if (distance < distanceBetween && currentHealth > 0)
         {
             // Set a boolean parameter in the Animator to indicate that the enemy is running.
             animator.SetBool("IsRunning?", true);
             // Move the enemy towards the player's position at a certain speed.
             transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
         }
-        else
+        else if (currentHealth > 0)
         {
             // If the player isn't near by run the "MoveToNextPoint()" function
             MoveToNextPoint();
+        }
+        else if (currentHealth <= 0)
+        {
+            // Set a boolean parameter in the Animator to indicate that the enemy is running.
+            animator.SetBool("IsRunning?", false);
+            // Set a boolean parameter in the Animator to indicate that the enemy is dead.
+            animator.SetBool("IsAlive?", false);
+            StartCoroutine(Die());
         }
     }
 
@@ -76,23 +87,15 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
         // Set a boolean parameter in the Animator to indicate that the enemy is hurt.
         animator.SetTrigger("Hurt");
-        // If the enemy's health reaches zero, run the "Die()" function
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
     }
 
-    void Die()
+    public IEnumerator Die()
     {
-        // Set a boolean parameter in the Animator to indicate that the enemy is running.
-        animator.SetBool("IsRunning?", false);
-        // Set a boolean parameter in the Animator to indicate that the enemy is dead.
-        animator.SetBool("IsDead?", true);
-        // GetComponent<BoxCollider2D>().enabled = false;
+        yield return new WaitForSeconds(1);
+        // Add score
         Score.ScoreValue += 10;
-        // Disable the script
-        this.enabled = false;
+        // Destoy the game object
+        Destroy(gameObject);
     }
 
     void Init()
