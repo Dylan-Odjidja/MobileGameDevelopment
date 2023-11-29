@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator Die()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         // Add score
         Score.ScoreValue += 10;
         // Destoy the game object
@@ -108,7 +108,7 @@ public class Enemy : MonoBehaviour
         rigidBody.gravityScale = 3;
 
         // Create Root object
-        GameObject root = new GameObject(name + "_Root");
+        GameObject root = new GameObject(name);
 
         // Reset position of Root to enemy object
         root.transform.position = transform.position;

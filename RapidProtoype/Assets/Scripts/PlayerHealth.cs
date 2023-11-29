@@ -24,17 +24,13 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(20);
         }
-        if (currentHealth <= 0)
-        {
-            StartCoroutine(Die());
-        }
         if (Input.GetKeyDown(KeyCode.Q))
         {
             StartCoroutine(Die());
         }
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         // Trigger a "Hurt" animation in the Animator.
         animator.SetTrigger("Hurt");
@@ -43,6 +39,10 @@ public class PlayerHealth : MonoBehaviour
         // Update the health bar UI to reflect the new health value.
         healthBar.SetHealth(currentHealth);
         // Check if the character's health has dropped to or below zero.
+        if (currentHealth <= 0)
+        {
+            StartCoroutine(Die());
+        }
     }
 
     public IEnumerator Die()

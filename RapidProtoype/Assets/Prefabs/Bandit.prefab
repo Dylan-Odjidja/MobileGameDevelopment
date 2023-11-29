@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2224534051221909128}
   m_Layer: 0
-  m_Name: Bandit_Root
+  m_Name: Bandit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

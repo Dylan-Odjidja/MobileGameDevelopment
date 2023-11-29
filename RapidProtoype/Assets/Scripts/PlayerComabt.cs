@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerComabt : MonoBehaviour
 {
+    [Header("Variables")]
     public Animator animator;
-
+    [Header("Attacking")]
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
     public int attackDamage = 20;
-
     public float attackRate = 2f;
     float nextAttackTime = 0f;
 
@@ -32,7 +32,7 @@ public class PlayerComabt : MonoBehaviour
             // Loop through all detected enemies and apply damage to them by calling their TakeDamage method.
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+                enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
             }
             // Update the next attack time to prevent immediate consecutive attacks based on the attack rate.
             nextAttackTime = Time.time + 1f / attackRate;
