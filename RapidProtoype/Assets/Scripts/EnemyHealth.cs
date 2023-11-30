@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
 {
     [Header("Variables")]
     private Animator animator;
+    private Rigidbody2D rb;
     [Header("Health")]
     public int maxHealth = 100;
     public int currentHealth;
@@ -14,6 +15,7 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void TakeDamage(int damage)
@@ -24,6 +26,8 @@ public class EnemyHealth : MonoBehaviour
         animator.SetTrigger("Hurt");
         if (currentHealth <= 0)
         {
+            animator.SetBool("IsAlive?", false);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX;
             StartCoroutine(Die());
         }
     }

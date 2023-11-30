@@ -108,7 +108,7 @@ public class Enemy : MonoBehaviour
         rigidBody.gravityScale = 3;
 
         // Create Root object
-        GameObject root = new GameObject(name);
+        GameObject root = new GameObject("Enemy_" + name);
 
         // Reset position of Root to enemy object
         root.transform.position = transform.position;
