@@ -33,10 +33,10 @@ public class EnemyMovement : MonoBehaviour
         enemyCombatScript = GetComponent<EnemyCombat>();
         // Find the EnemyHealth script
         enemyHealthScript = GetComponent<EnemyHealth>();
-        // Find the PlayerHealth script
-        playerHealthScript = GetComponent<PlayerHealth>();
         // Find and store a reference to the player game object using the "Player" tag.
         player = GameObject.FindGameObjectWithTag("Player");
+        // Find the PlayerHealth script
+        playerHealthScript = player.GetComponent<PlayerHealth>();
         // Set the range in which the enemy must detect the player
         distanceBetween = 8;
     }
@@ -47,7 +47,7 @@ public class EnemyMovement : MonoBehaviour
         distance = Vector2.Distance(transform.position, player.transform.position);
         // Give the speed on the enemy to the animator so it knows when to play a running animation
         animator.SetFloat("Speed", speed);
-        // Set the speed to zero if the enemy is no moving
+        // Set speed to "0" when not moving
         speed = 0;
 
         // Flip the enemy's sprite based on the relative positions of the enemy and the player.

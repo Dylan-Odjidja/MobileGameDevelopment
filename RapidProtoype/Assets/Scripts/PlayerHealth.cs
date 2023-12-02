@@ -51,13 +51,11 @@ public class PlayerHealth : MonoBehaviour
         animator.SetBool("IsAlive?", false);
         // Wait for 2 seconds before executing the following code
         yield return new WaitForSeconds(2);
-        // Stop the background music
-        MusicPlayer.audioSource.Stop();
-        // Play death sound
-        SFX.PlaySound("PlayerDeath");
         // Activate the menu GameObject
         menu.SetActive(true);
         // Set the game's time scale to zero, effectively pausing the game.
         Time.timeScale = 0;
+        // Stop the background music
+        MusicPlayer.audioSource.Stop();
     }
 }

@@ -38,8 +38,6 @@ public class PlayerMovement : MonoBehaviour
         jump = true;
         // Set the "IsJumping?" boolean parameter in the Animator to true.
         animator.SetBool("IsJumping?", true);
-        // play jump sound effect
-        SFX.PlaySound("PlayerJump");
     }
 
     public void OnLanding()
