@@ -34,9 +34,9 @@ public class EnemyHealth : MonoBehaviour
 
     public IEnumerator Die()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         // Add score
-        Score.ScoreValue += 10;
+        Score.scoreValue += 10;
         // Destoy the game object
         Destroy(gameObject);
     }

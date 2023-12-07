@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         // Add score
-        Score.ScoreValue += 10;
+        Score.scoreValue += 10;
         // Destoy the game object
         Destroy(gameObject);
     }

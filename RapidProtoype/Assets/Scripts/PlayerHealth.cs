@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public Animator animator;
     public HealthBar healthBar;
     public GameObject menu;
+    public InterstitialAdExample interstitialAd;
 
     void Start()
     {
@@ -51,6 +52,8 @@ public class PlayerHealth : MonoBehaviour
         animator.SetBool("IsAlive?", false);
         // Wait for 2 seconds before executing the following code
         yield return new WaitForSeconds(2);
+        // Play Ad
+        interstitialAd.ShowAd();
         // Activate the menu GameObject
         menu.SetActive(true);
         // Set the game's time scale to zero, effectively pausing the game.

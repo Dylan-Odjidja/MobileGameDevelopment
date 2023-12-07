@@ -10,7 +10,7 @@ public class EnemyCombat : MonoBehaviour
     public GameObject player;
     [Header("Attacking")]
     public LayerMask playerLayer;
-    public int enemyDamage = 10;
+    public int enemyDamage = 5;
     public float attackRate = 1f;
     float nextAttackTime = 0f;
     public Transform attackPoint;
@@ -25,7 +25,7 @@ public class EnemyCombat : MonoBehaviour
 
     public void Attack()
     {
-        if (Time.time >= nextAttackTime)
+        if (Time.time >= nextAttackTime && animator.GetBool("Hurt") == false)
         {
             // Trigger the "Attack" animation in the Animator
             animator.SetTrigger("Attack");
