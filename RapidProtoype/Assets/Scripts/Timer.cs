@@ -20,16 +20,16 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (remainingTime > 0)
-        {
-            remainingTime -= Time.deltaTime;
-        }
-        else if (remainingTime < 0)
-        {
-            remainingTime = 0;
-            timerText.color = Color.red;
-            StartCoroutine(playerHealthScript.Die());
-        }
+            if (remainingTime > 0)
+            {
+                remainingTime -= Time.deltaTime;
+            }
+            else if (remainingTime < 0)
+            {
+                remainingTime = 0;
+                timerText.color = Color.red;
+                StartCoroutine(playerHealthScript.Die());
+            }
         
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);

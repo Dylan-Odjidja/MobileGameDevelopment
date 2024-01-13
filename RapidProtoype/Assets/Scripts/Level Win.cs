@@ -2,32 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelWin : MonoBehaviour
 {
     public BoxCollider2D boxCollider;
     public InterstitialAdExample interstitialAd;
-    public GameObject menu;
+    public int nextSceneLoad;
 
-    private void Awake()
+    private void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
+        nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1;
     }
 
-    private void OnTriggerEnter2D(Collider2D boxCollider)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        StartCoroutine(Win());
-    }
+        if (collision.gameObject.tag == "Player")
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 3)
+            {
+                SceneManager.LoadScene("Main Menu");
+                Debug.Log("MORE LEVELS COMING SOON");
+            }
+            else
+            {
+                SceneManager.LoadScene(nextSceneLoad);
 
-    public IEnumerator Win()
-    {
-        // Wait for 2 seconds before executing the following code
-        yield return new WaitForSeconds(1.5f);
-        // Play Ad
-        interstitialAd.ShowAd();
-        // Activate the menu GameObject
-        menu.SetActive(true);
-        // Set the game's time scale to zero, effectively pausing the game.
-        Time.timeScale = 0;
+                if (nextSceneLoad > PlayerPrefs.GetInt("levelAt"))
+                {
+                    PlayerPrefs.SetInt("levelAt", nextSceneLoad);
+                }
+            }
+        }
     }
 }

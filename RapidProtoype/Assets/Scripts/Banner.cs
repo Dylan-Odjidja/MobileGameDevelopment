@@ -9,7 +9,7 @@ public class BannerAdExample : MonoBehaviour
     [SerializeField] Button _showBannerButton;
     [SerializeField] Button _hideBannerButton;
 
-    [SerializeField] BannerPosition _bannerPosition = BannerPosition.BOTTOM_CENTER;
+    [SerializeField] BannerPosition _bannerPosition = BannerPosition.BOTTOM_RIGHT;
 
     [SerializeField] string _androidAdUnitId = "Banner_Android";
     [SerializeField] string _iOSAdUnitId = "Banner_iOS";
@@ -63,6 +63,8 @@ public class BannerAdExample : MonoBehaviour
         // Enable both buttons:
         _showBannerButton.interactable = true;
         _hideBannerButton.interactable = true;
+
+        ShowBannerAd();
     }
 
     // Implement code to execute when the load errorCallback event triggers:

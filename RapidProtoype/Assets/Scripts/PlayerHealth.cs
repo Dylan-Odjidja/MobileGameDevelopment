@@ -17,6 +17,8 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         // Set the maximum health value for the health bar UI element.
         healthBar.SetMaxHealth(maxHealth);
+        //Vibrates the screen
+        Vibrator.Vibrate();
     }
 
     void Update()
@@ -42,8 +44,18 @@ public class PlayerHealth : MonoBehaviour
         // Check if the character's health has dropped to or below zero.
         if (currentHealth <= 0)
         {
+            //Vibrates the screen
+            Vibrator.Vibrate();
             StartCoroutine(Die());
         }
+    }
+
+    public void Heal(int amount)
+    {
+        // Increase the character's current health by the specified amount.
+        currentHealth += amount;
+        // Update the health bar UI to reflect the new health value.
+        healthBar.SetHealth(currentHealth);
     }
 
     public IEnumerator Die()

@@ -8,6 +8,7 @@ public class EnemyCombat : MonoBehaviour
     public Animator animator;
     public PlayerHealth playerHealthScript;
     public GameObject player;
+    private EnemyHealth health;
     [Header("Attacking")]
     public LayerMask playerLayer;
     public int enemyDamage = 5;
@@ -20,6 +21,7 @@ public class EnemyCombat : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
+        health = GetComponent<EnemyHealth>();
         playerHealthScript = player.GetComponent<PlayerHealth>();
     }
 
@@ -34,7 +36,10 @@ public class EnemyCombat : MonoBehaviour
             // Loop through all detected enemies and apply damage to them by calling their TakeDamage method.
             foreach (Collider2D player in hitPlayer)
             {
-                StartCoroutine(AttackDelay());
+                if (health.isAlive == true)
+                {
+                    StartCoroutine(AttackDelay());
+                }
             }
             // Update the next attack time to prevent immediate consecutive attacks based on the attack rate.
             nextAttackTime = Time.time + 1f / attackRate;

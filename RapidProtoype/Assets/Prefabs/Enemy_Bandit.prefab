@@ -239,8 +239,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82020eb0ae55654d8db7ad90f04f897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 40
   currentHealth: 0
+  healthItem: {fileID: 9119288428162521519, guid: 215e8480303b660438a1d81ce02bb35c, type: 3}
 --- !u!114 &5814444247834288171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,7 +276,7 @@ GameObject:
   - component: {fileID: 3461051779593224424}
   m_Layer: 0
   m_Name: Enemy_Bandit
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -295,7 +296,7 @@ Transform:
   - {fileID: 4060724010601330426}
   - {fileID: 8968607701547415339}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3993191148536910554
 GameObject:

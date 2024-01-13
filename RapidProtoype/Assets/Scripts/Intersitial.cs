@@ -35,6 +35,7 @@ public class InterstitialAdExample : MonoBehaviour, IUnityAdsLoadListener, IUnit
     public void OnUnityAdsAdLoaded(string adUnitId)
     {
         // Optionally execute code if the Ad Unit successfully loads content.
+        ShowAd();
     }
 
     public void OnUnityAdsFailedToLoad(string _adUnitId, UnityAdsLoadError error, string message)
@@ -49,7 +50,15 @@ public class InterstitialAdExample : MonoBehaviour, IUnityAdsLoadListener, IUnit
         // Optionally execute code if the Ad Unit fails to show, such as loading another ad.
     }
 
-    public void OnUnityAdsShowStart(string _adUnitId) { }
+    public void OnUnityAdsShowStart(string _adUnitId) 
+    {
+        Time.timeScale = 0;
+        MusicPlayer.audioSource.Pause();
+    }
     public void OnUnityAdsShowClick(string _adUnitId) { }
-    public void OnUnityAdsShowComplete(string _adUnitId, UnityAdsShowCompletionState showCompletionState) { }
+    public void OnUnityAdsShowComplete(string _adUnitId, UnityAdsShowCompletionState showCompletionState) 
+    {
+        Time.timeScale = 1;
+        MusicPlayer.audioSource.Play();
+    }
 }

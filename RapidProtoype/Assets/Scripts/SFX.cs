@@ -14,11 +14,8 @@ public class SFX : MonoBehaviour
     void Start()
     {
         sfx1 = Resources.Load<AudioClip>("Swing");
-        Debug.Log("Loaded sfx 1");
         sfx2 = Resources.Load<AudioClip>("Jump");
-        Debug.Log("Loaded sfx 2");
         sfx3 = Resources.Load<AudioClip>("Death");
-        Debug.Log("Loaded sfx 3");
 
         // Find any game object in the scene with the tag "SFX" and assign it to the sfxObject variable.
         sfxObject = GameObject.FindWithTag("SFX");
@@ -52,16 +49,13 @@ public class SFX : MonoBehaviour
         switch (clip)
         {
             case "PlayerSwing":
-                audioSource.PlayOneShot(sfx1);
-                Debug.Log("Played sfx1");
+                audioSource.PlayOneShot(sfx1);;
                 break;
             case "PlayerJump":
                 audioSource.PlayOneShot(sfx2);
-                Debug.Log("Played sfx2");
                 break;
             case "PlayerDeath":
                 audioSource.PlayOneShot(sfx3);
-                Debug.Log("Played sfx3");
                 break;
         }
     }
